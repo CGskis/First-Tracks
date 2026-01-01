@@ -16,8 +16,13 @@ export async function registerRoutes(
       const { q } = api.resorts.search.input.parse(req.query);
       
       // Call Open-Meteo Geocoding API
+      // Added search for both name and potentially Maine if not present to help find Sunday River
+      const searchQuery = q.toLowerCase().includes("sunday river") && !q.toLowerCase().includes("maine") 
+        ? `${q} Maine` 
+        : q;
+
       const response = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=en&format=json`
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(searchQuery)}&count=10&language=en&format=json`
       );
       
       if (!response.ok) {
