@@ -1,38 +1,23 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import { resorts, type InsertResort, type Resort } from "@shared/schema";
+import { ilike } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // Resort caching (optional, but good for structure)
+  createResort(resort: InsertResort): Promise<Resort>;
+  searchResortsByName(name: string): Promise<Resort[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async createResort(insertResort: InsertResort): Promise<Resort> {
+    const [resort] = await db.insert(resorts).values(insertResort).returning();
+    return resort;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async searchResortsByName(name: string): Promise<Resort[]> {
+    return await db.select().from(resorts).where(ilike(resorts.name, `%${name}%`));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
