@@ -5,10 +5,13 @@ import { z } from "zod";
 
 export const resorts = pgTable("resorts", {
   id: serial("id").primaryKey(),
+  externalId: text("external_id").unique(), // For Ski API / Slopes
   name: text("name").notNull(),
   latitude: doublePrecision("latitude").notNull(),
   longitude: doublePrecision("longitude").notNull(),
   country: text("country"),
+  region: text("region"),
+  slug: text("slug"),
 });
 
 export const insertResortSchema = createInsertSchema(resorts).omit({ id: true });
@@ -26,6 +29,7 @@ export const weatherSchema = z.object({
   description: z.string(),
   isNight: z.boolean(),
   icon: z.string(),
+  source: z.string().optional(),
 });
 
 export type WeatherForecast = z.infer<typeof weatherSchema>;
