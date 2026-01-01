@@ -11,6 +11,7 @@ export const resorts = pgTable("resorts", {
   longitude: doublePrecision("longitude").notNull(),
   country: text("country"),
   region: text("region"),
+  state: text("state"), // Added state field explicitly
   slug: text("slug"),
 });
 
