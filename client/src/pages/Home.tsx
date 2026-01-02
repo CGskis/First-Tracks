@@ -36,7 +36,7 @@ export default function Home() {
               className="text-center mb-10 space-y-4"
             >
               <h1 className="text-5xl md:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
-                Chase the Storm
+                Chase the Snow
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Real-time overnight weather forecasts for skiers. Find out exactly how much snow will be waiting for you in the morning.

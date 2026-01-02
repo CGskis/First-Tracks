@@ -72,7 +72,9 @@ export function SearchResort({ onSelect }: SearchResortProps) {
                 </div>
                 <div>
                   <div className="font-medium text-foreground">{resort.name}</div>
-                  <div className="text-sm text-muted-foreground">{resort.country}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {[resort.region, resort.country].filter(Boolean).join(", ")}
+                  </div>
                 </div>
               </button>
             ))}
