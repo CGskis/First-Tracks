@@ -52,7 +52,7 @@ export async function registerRoutes(
 
       // Source 1: Open-Meteo
       const meteoRes = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,snowfall,rain,weather_code,wind_speed_10m,freezing_level_height&timezone=auto`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,snowfall,rain,weather_code,wind_speed_10m,freezing_level_height&timezone=auto&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`
       );
 
       if (!meteoRes.ok) throw new Error("Meteo failed");

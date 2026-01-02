@@ -19,8 +19,8 @@ interface WeatherDashboardProps {
 }
 
 export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
-  const isPowderDay = weather.snowfall > 5;
-  const isFreezing = weather.temperature < 0;
+  const isPowderDay = weather.snowfall > 2;
+  const isFreezing = weather.temperature < 32;
 
   return (
     <div className="space-y-6">
@@ -73,7 +73,7 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
               </div>
               <div className="mt-4">
                 <div className="text-5xl font-display font-bold tracking-tight">
-                  {Math.round(weather.temperature)}°
+                  {Math.round(weather.temperature)}°<span className="text-2xl text-muted-foreground ml-1">F</span>
                 </div>
                 <div className="text-sm text-muted-foreground mt-1 capitalize">
                   {weather.description}
@@ -106,12 +106,12 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
               </div>
               <div className="flex items-baseline gap-4 mt-2">
                 <div className="text-6xl font-display font-bold text-white drop-shadow-lg">
-                  {weather.snowfall}<span className="text-2xl text-muted-foreground ml-1">cm</span>
+                  {weather.snowfall}<span className="text-2xl text-muted-foreground ml-1">in</span>
                 </div>
                 {weather.rain > 0 && (
                   <div className="flex items-center gap-1 text-blue-400">
                     <CloudRain className="w-4 h-4" />
-                    <span className="text-lg font-medium">{weather.rain}mm rain</span>
+                    <span className="text-lg font-medium">{weather.rain}in rain</span>
                   </div>
                 )}
               </div>
@@ -146,7 +146,7 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">Wind</div>
-                  <div className="font-display font-bold text-xl">{weather.windSpeed} <span className="text-sm font-normal text-muted-foreground">km/h</span></div>
+                  <div className="font-display font-bold text-xl">{weather.windSpeed} <span className="text-sm font-normal text-muted-foreground">mph</span></div>
                 </div>
               </div>
             </div>
@@ -160,7 +160,7 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">Freezing Level</div>
-                  <div className="font-display font-bold text-xl">{weather.freezingLevel} <span className="text-sm font-normal text-muted-foreground">m</span></div>
+                  <div className="font-display font-bold text-xl">{weather.freezingLevel} <span className="text-sm font-normal text-muted-foreground">ft</span></div>
                 </div>
               </div>
             </div>
@@ -237,8 +237,8 @@ function MapPinIcon({ className }: { className?: string }) {
 
 function getSnowQuality(temp: number, snow: number): string {
   if (snow === 0) return "Firm / Groomed";
-  if (temp > 0) return "Wet / Slush";
-  if (temp < -10 && snow > 5) return "Champagne Powder";
-  if (temp < 0 && snow > 0) return "Fresh Powder";
+  if (temp > 32) return "Wet / Slush";
+  if (temp < 14 && snow > 2) return "Champagne Powder";
+  if (temp < 32 && snow > 0) return "Fresh Powder";
   return "Variable";
 }
