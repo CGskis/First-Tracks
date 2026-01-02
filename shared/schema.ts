@@ -23,6 +23,7 @@ export type InsertResort = z.infer<typeof insertResortSchema>;
 // Weather Types (Non-database)
 export const weatherSchema = z.object({
   temperature: z.number(),
+  apparentTemperature: z.number().optional(),
   snowfall: z.number(), // in cm
   rain: z.number(), // in mm
   windSpeed: z.number(), // in km/h

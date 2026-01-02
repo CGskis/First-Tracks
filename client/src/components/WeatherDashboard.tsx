@@ -75,6 +75,11 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
                 <div className="text-5xl font-display font-bold tracking-tight">
                   {Math.round(weather.temperature)}°<span className="text-2xl text-muted-foreground ml-1">F</span>
                 </div>
+                {weather.apparentTemperature !== undefined && (
+                  <div className="text-sm text-muted-foreground mt-1">
+                    Feels like {Math.round(weather.apparentTemperature)}°F
+                  </div>
+                )}
                 <div className="text-sm text-muted-foreground mt-1 capitalize">
                   {weather.description}
                 </div>

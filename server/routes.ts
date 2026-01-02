@@ -52,7 +52,7 @@ export async function registerRoutes(
 
       // Source 1: Open-Meteo
       const meteoRes = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,snowfall,rain,weather_code,wind_speed_10m,freezing_level_height&timezone=auto&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,apparent_temperature,snowfall,rain,weather_code,wind_speed_10m,freezing_level_height&timezone=auto&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`
       );
 
       if (!meteoRes.ok) throw new Error("Meteo failed");
@@ -63,6 +63,7 @@ export async function registerRoutes(
 
       const forecast = {
         temperature: hourly.temperature_2m[targetIndex],
+        apparentTemperature: hourly.apparent_temperature[targetIndex],
         snowfall: hourly.snowfall[targetIndex],
         rain: hourly.rain[targetIndex],
         windSpeed: hourly.wind_speed_10m[targetIndex],
