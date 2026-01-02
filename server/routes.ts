@@ -61,17 +61,18 @@ export async function registerRoutes(
       const hourly = meteoData.hourly;
       const targetIndex = 22; // Representative night hour
 
+      // In a real app, you'd fetch this from a ski-specific API
       const forecast = {
         temperature: hourly.temperature_2m[targetIndex],
         apparentTemperature: hourly.apparent_temperature[targetIndex],
         snowfall: hourly.snowfall[targetIndex],
         rain: hourly.rain[targetIndex],
         windSpeed: hourly.wind_speed_10m[targetIndex],
-        acresOpen: Math.floor(Math.random() * 2000) + 500, // Placeholder for real data
-        liftsOpen: Math.floor(Math.random() * 10) + 5,
-        totalLifts: 20,
-        trailsOpen: Math.floor(Math.random() * 50) + 20,
-        totalTrails: 100,
+        acresOpen: 1200,
+        liftsOpen: 14,
+        totalLifts: 22,
+        trailsOpen: 85,
+        totalTrails: 110,
         description: "Variable",
         isNight: true,
         icon: "cloud",
