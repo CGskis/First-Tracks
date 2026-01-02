@@ -27,7 +27,11 @@ export const weatherSchema = z.object({
   snowfall: z.number(), // in cm
   rain: z.number(), // in mm
   windSpeed: z.number(), // in km/h
-  freezingLevel: z.number(), // in meters
+  acresOpen: z.number().optional(),
+  liftsOpen: z.number().optional(),
+  totalLifts: z.number().optional(),
+  trailsOpen: z.number().optional(),
+  totalTrails: z.number().optional(),
   description: z.string(),
   isNight: z.boolean(),
   icon: z.string(),

@@ -67,7 +67,11 @@ export async function registerRoutes(
         snowfall: hourly.snowfall[targetIndex],
         rain: hourly.rain[targetIndex],
         windSpeed: hourly.wind_speed_10m[targetIndex],
-        freezingLevel: hourly.freezing_level_height[targetIndex],
+        acresOpen: Math.floor(Math.random() * 2000) + 500, // Placeholder for real data
+        liftsOpen: Math.floor(Math.random() * 10) + 5,
+        totalLifts: 20,
+        trailsOpen: Math.floor(Math.random() * 50) + 20,
+        totalTrails: 100,
         description: "Variable",
         isNight: true,
         icon: "cloud",

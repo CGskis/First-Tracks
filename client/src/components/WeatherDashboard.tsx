@@ -164,8 +164,36 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
                   <Mountain className="w-5 h-5 text-gray-400" />
                 </div>
                 <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Freezing Level</div>
-                  <div className="font-display font-bold text-xl">{weather.freezingLevel} <span className="text-sm font-normal text-muted-foreground">ft</span></div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Acres Open</div>
+                  <div className="font-display font-bold text-xl">{weather.acresOpen} <span className="text-sm font-normal text-muted-foreground">acres</span></div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="bg-white/5 border-white/10">
+            <div className="p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-white/10">
+                  <Snowflake className="w-5 h-5 text-gray-400" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Lifts Open</div>
+                  <div className="font-display font-bold text-xl">{weather.liftsOpen} <span className="text-sm font-normal text-muted-foreground">/ {weather.totalLifts}</span></div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="bg-white/5 border-white/10">
+            <div className="p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-white/10">
+                  <Droplets className="w-5 h-5 text-gray-400" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Trails Open</div>
+                  <div className="font-display font-bold text-xl">{weather.trailsOpen} <span className="text-sm font-normal text-muted-foreground">/ {weather.totalTrails}</span></div>
                 </div>
               </div>
             </div>
