@@ -67,7 +67,7 @@ export function ResortComparison() {
                 <WeatherDashboard weather={weather1.data} resort={resort1} isCompact />
               </motion.div>
             ) : (
-              <div className="h-64 flex items-center justify-center border-2 border-dashed border-white/5 rounded-3xl text-muted-foreground bg-white/[0.02]">
+              <div className="h-48 md:h-64 flex items-center justify-center border-2 border-dashed border-white/5 rounded-3xl text-muted-foreground bg-white/[0.02]">
                 Select a resort to compare
               </div>
             )}
@@ -90,7 +90,7 @@ export function ResortComparison() {
                 <WeatherDashboard weather={weather2.data} resort={resort2} isCompact />
               </motion.div>
             ) : (
-              <div className="h-64 flex items-center justify-center border-2 border-dashed border-white/5 rounded-3xl text-muted-foreground bg-white/[0.02]">
+              <div className="h-48 md:h-64 flex items-center justify-center border-2 border-dashed border-white/5 rounded-3xl text-muted-foreground bg-white/[0.02]">
                 Select a second resort
               </div>
             )}
