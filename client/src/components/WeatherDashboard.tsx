@@ -16,15 +16,16 @@ import { motion } from "framer-motion";
 interface WeatherDashboardProps {
   weather: WeatherData;
   resort: Resort;
+  isCompact?: boolean;
 }
 
-export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
+export function WeatherDashboard({ weather, resort, isCompact }: WeatherDashboardProps) {
   const isPowderDay = weather.snowfall > 2;
   const isFreezing = weather.temperature < 32;
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row gap-6 justify-between items-end pb-4 border-b border-white/10">
+      <div className={`flex flex-col ${isCompact ? 'gap-3' : 'md:flex-row gap-6'} justify-between items-end pb-4 border-b border-white/10`}>
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -38,7 +39,7 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70"
+            className={`${isCompact ? 'text-3xl' : 'text-4xl md:text-6xl'} font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70`}
           >
             {resort.name}
           </motion.h1>
@@ -52,18 +53,18 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
         >
           {weather.isNight ? <Moon className="w-5 h-5 text-indigo-400" /> : <Sun className="w-5 h-5 text-amber-400" />}
           <span className="text-sm font-medium">
-            {weather.isNight ? "Overnight Forecast" : "Daytime Forecast"}
+            {weather.isNight ? "Overnight" : "Daytime"}
           </span>
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className={`grid grid-cols-1 ${isCompact ? 'md:grid-cols-1 lg:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-4'} gap-4 md:gap-6`}>
         {/* Temperature Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="col-span-1 md:col-span-2 lg:col-span-1"
+          className="col-span-1"
         >
           <Card className="h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-blue-500/20">
             <div className="p-6 h-full flex flex-col justify-between">
@@ -72,14 +73,9 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
                 <ThermometerSnowflake className={`w-6 h-6 ${isFreezing ? "text-cyan-400" : "text-orange-400"}`} />
               </div>
               <div className="mt-4">
-                <div className="text-5xl font-display font-bold tracking-tight">
-                  {Math.round(weather.temperature)}°<span className="text-2xl text-muted-foreground ml-1">F</span>
+                <div className={`${isCompact ? 'text-4xl' : 'text-5xl'} font-display font-bold tracking-tight`}>
+                  {Math.round(weather.temperature)}°<span className="text-xl text-muted-foreground ml-1">F</span>
                 </div>
-                {weather.apparentTemperature !== undefined && (
-                  <div className="text-sm text-muted-foreground mt-1">
-                    Feels like {Math.round(weather.apparentTemperature)}°F
-                  </div>
-                )}
                 <div className="text-sm text-muted-foreground mt-1 capitalize">
                   {weather.description}
                 </div>
@@ -88,55 +84,29 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
           </Card>
         </motion.div>
 
-        {/* Snowfall Card - Hero */}
+        {/* Snowfall Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="col-span-1 md:col-span-2 lg:col-span-2"
+          className="col-span-1"
         >
           <Card className={`h-full relative overflow-hidden ${isPowderDay ? "border-primary/50 bg-primary/5" : ""}`}>
-            {isPowderDay && (
-              <div className="absolute top-0 right-0 p-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.5)] animate-pulse">
-                  <Snowflake className="w-3 h-3" /> POWDER ALERT
-                </span>
-              </div>
-            )}
-            
             <div className="p-6 h-full flex flex-col justify-between relative z-10">
               <div className="flex justify-between items-start">
-                <span className="text-muted-foreground font-medium">Snowfall (Overnight)</span>
+                <span className="text-muted-foreground font-medium">Snowfall</span>
                 <CloudSnow className="w-6 h-6 text-white" />
               </div>
-              <div className="flex items-baseline gap-4 mt-2">
-                <div className="text-6xl font-display font-bold text-white drop-shadow-lg">
-                  {weather.snowfall}<span className="text-2xl text-muted-foreground ml-1">in</span>
+              <div className="flex items-baseline gap-2 mt-4">
+                <div className={`${isCompact ? 'text-4xl' : 'text-5xl'} font-display font-bold text-white`}>
+                  {weather.snowfall}<span className="text-xl text-muted-foreground ml-1">in</span>
                 </div>
-                {weather.rain > 0 && (
-                  <div className="flex items-center gap-1 text-blue-400">
-                    <CloudRain className="w-4 h-4" />
-                    <span className="text-lg font-medium">{weather.rain}in rain</span>
-                  </div>
-                )}
               </div>
-              <div className="mt-4 text-sm text-muted-foreground">
-                {weather.snowfall > 10 
-                  ? "Heavy snow expected. Prepare for deep conditions!" 
-                  : weather.snowfall > 0 
-                    ? "Fresh dusting expected overnight." 
-                    : "No fresh snow expected tonight."}
-              </div>
-            </div>
-
-            {/* Background Decoration */}
-            <div className="absolute -bottom-10 -right-10 opacity-5 pointer-events-none">
-              <Snowflake className="w-48 h-48" />
             </div>
           </Card>
         </motion.div>
 
-        {/* Wind & Freezing Level */}
+        {/* Wind Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -144,15 +114,13 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
           className="col-span-1"
         >
           <Card className="bg-white/5 border-white/10 h-full">
-            <div className="p-6 flex flex-col justify-center h-full">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-white/10">
-                  <Wind className="w-6 h-6 text-gray-400" />
-                </div>
-                <div>
-                  <div className="text-sm text-muted-foreground uppercase tracking-wider font-medium">Wind</div>
-                  <div className="font-display font-bold text-3xl">{weather.windSpeed} <span className="text-lg font-normal text-muted-foreground">mph</span></div>
-                </div>
+            <div className="p-6 h-full flex flex-col justify-between">
+              <div className="flex justify-between items-start">
+                <span className="text-muted-foreground font-medium uppercase tracking-wider text-xs">Wind</span>
+                <Wind className="w-5 h-5 text-gray-400" />
+              </div>
+              <div className="mt-4">
+                <div className={`${isCompact ? 'text-4xl' : 'text-5xl'} font-display font-bold`}>{weather.windSpeed} <span className="text-xl font-normal text-muted-foreground">mph</span></div>
               </div>
             </div>
           </Card>
