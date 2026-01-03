@@ -1,0 +1,1 @@
+I'm trying to make an app to give skiing conditions for resorts. I'm using replit for now but may switch later on. This has all of my files for the project. To access the site, go to https://ski-forecast--kvnshshs.replit.app
