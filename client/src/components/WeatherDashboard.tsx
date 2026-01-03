@@ -141,59 +141,17 @@ export function WeatherDashboard({ weather, resort }: WeatherDashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="col-span-1 space-y-4"
+          className="col-span-1"
         >
-          <Card className="bg-white/5 border-white/10">
-            <div className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-white/10">
-                  <Wind className="w-5 h-5 text-gray-400" />
+          <Card className="bg-white/5 border-white/10 h-full">
+            <div className="p-6 flex flex-col justify-center h-full">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-white/10">
+                  <Wind className="w-6 h-6 text-gray-400" />
                 </div>
                 <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Wind</div>
-                  <div className="font-display font-bold text-xl">{weather.windSpeed} <span className="text-sm font-normal text-muted-foreground">mph</span></div>
-                </div>
-              </div>
-            </div>
-          </Card>
-          
-          <Card className="bg-white/5 border-white/10">
-            <div className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-white/10">
-                  <Mountain className="w-5 h-5 text-gray-400" />
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Acres Open</div>
-                  <div className="font-display font-bold text-xl">{weather.acresOpen} <span className="text-sm font-normal text-muted-foreground">acres</span></div>
-                </div>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="bg-white/5 border-white/10">
-            <div className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-white/10">
-                  <Snowflake className="w-5 h-5 text-gray-400" />
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Lifts Open</div>
-                  <div className="font-display font-bold text-xl">{weather.liftsOpen} <span className="text-sm font-normal text-muted-foreground">/ {weather.totalLifts}</span></div>
-                </div>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="bg-white/5 border-white/10">
-            <div className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-white/10">
-                  <Droplets className="w-5 h-5 text-gray-400" />
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Trails Open</div>
-                  <div className="font-display font-bold text-xl">{weather.trailsOpen} <span className="text-sm font-normal text-muted-foreground">/ {weather.totalTrails}</span></div>
+                  <div className="text-sm text-muted-foreground uppercase tracking-wider font-medium">Wind</div>
+                  <div className="font-display font-bold text-3xl">{weather.windSpeed} <span className="text-lg font-normal text-muted-foreground">mph</span></div>
                 </div>
               </div>
             </div>
