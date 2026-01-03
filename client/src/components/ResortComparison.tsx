@@ -50,7 +50,7 @@ export function ResortComparison() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <AnimatePresence mode="wait">
           <div className="space-y-6">
             {weather1.isLoading ? (
