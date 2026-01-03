@@ -172,6 +172,42 @@ export function WeatherDashboard({ weather, resort, isCompact }: WeatherDashboar
           </div>
         </Card>
       </motion.div>
+
+      {/* Trails Section */}
+      {weather.trails && weather.trails.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          <div className="flex items-center gap-3 mb-4 px-2">
+            <Mountain className="w-5 h-5 text-primary" />
+            <h3 className="text-xl font-display font-bold text-white">Trail Report</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {weather.trails.map((trail, idx) => (
+              <Card key={idx} className="bg-white/5 border-white/10 overflow-hidden group hover:border-primary/30 transition-colors">
+                <div className="p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${
+                      trail.difficulty === 'beginner' ? 'bg-green-500' :
+                      trail.difficulty === 'intermediate' ? 'bg-blue-500' :
+                      trail.difficulty === 'advanced' ? 'bg-black border border-white/20' :
+                      'bg-black shadow-[0_0_10px_rgba(255,0,0,0.5)]'
+                    }`} title={trail.difficulty} />
+                    <span className="font-medium text-white group-hover:text-primary transition-colors">{trail.name}</span>
+                  </div>
+                  <span className={`text-xs font-bold uppercase tracking-widest px-2 py-1 rounded ${
+                    trail.status === 'open' ? 'text-green-400 bg-green-400/10' : 'text-red-400 bg-red-400/10'
+                  }`}>
+                    {trail.status}
+                  </span>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

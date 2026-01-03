@@ -79,6 +79,13 @@ export async function registerRoutes(
         isNight: targetIndex >= 18 || targetIndex <= 6,
         icon: icon,
         source: "Open-Meteo",
+        trails: [
+          { name: "Ridge Run", status: "open", difficulty: "beginner" },
+          { name: "Powder Bowl", status: "open", difficulty: "advanced" },
+          { name: "Glacier Way", status: "closed", difficulty: "intermediate" },
+          { name: "Summit Peak", status: "open", difficulty: "expert" },
+          { name: "Mogul Mania", status: "open", difficulty: "advanced" },
+        ] as const,
       };
 
       res.json(forecast);

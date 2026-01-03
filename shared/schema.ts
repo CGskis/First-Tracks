@@ -31,6 +31,11 @@ export const weatherSchema = z.object({
   isNight: z.boolean(),
   icon: z.string(),
   source: z.string().optional(),
+  trails: z.array(z.object({
+    name: z.string(),
+    status: z.enum(["open", "closed"]),
+    difficulty: z.enum(["beginner", "intermediate", "advanced", "expert"])
+  })).optional(),
 });
 
 export type WeatherForecast = z.infer<typeof weatherSchema>;
